@@ -5,6 +5,7 @@ Github: https://github.com/mynameisfiber/high_performance_python/blob/master/01_
 """
 
 import os
+import time
 import datetime
 from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
 
@@ -19,6 +20,11 @@ def calculate_z_serial_purepython(maxiter, zs, cs):
         n = 0
         z = zs[i]
         c = cs[i]
+## --> ここから
+        if (i % 100) == 0:
+            # 100 回に一回の頻度で 100us のスリープ＝処理待ちを挿入
+            time.sleep(0.0001)
+## <-- ここまで
         while abs(z) < 2 and n < maxiter:
             z = z * z + c
             n += 1
