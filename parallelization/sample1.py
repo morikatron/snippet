@@ -1,8 +1,8 @@
-'''
+"""
 ジュリア集合の計算アルゴリズムは オライリー「ハイパフォーマンス Python」に記載されているものを使っています。
 書籍: https://www.oreilly.co.jp/books/9784873117409/
 Github: https://github.com/mynameisfiber/high_performance_python/blob/master/01_profiling/cpu_profiling/julia1_nopil.py
-'''
+"""
 
 import os
 import datetime
@@ -50,6 +50,8 @@ def calc_pure_python(desired_width, max_iterations):
 
 if __name__ == "__main__":
 
+    max_workers = os.cpu_count() #最大ワーカー数をシステムの CPU コアと同じにする
+
     start = datetime.datetime.now()
     for i in range(32):
         calc_pure_python(desired_width=500, max_iterations=100)
@@ -58,7 +60,7 @@ if __name__ == "__main__":
 
     # マルチスレッドの場合
     start = datetime.datetime.now()
-    with ThreadPoolExecutor(max_workers=os.cpu_count()) as executor:
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
         for i in range(32):
             executor.submit(calc_pure_python, 500, 100)
     elapsed = datetime.datetime.now() - start
@@ -66,7 +68,7 @@ if __name__ == "__main__":
 
     # マルチプロセスの場合
     start = datetime.datetime.now()
-    with ProcessPoolExecutor(max_workers=os.cpu_count()) as executor:
+    with ProcessPoolExecutor(max_workers=max_workers) as executor:
         for i in range(32):
             executor.submit(calc_pure_python, 500, 100)
     elapsed = datetime.datetime.now() - start
