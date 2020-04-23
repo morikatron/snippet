@@ -1,4 +1,4 @@
-Morikatron Engineer Blog の記事 「[Python のプログラムを並列処理で高速化する](公開されたURLを貼り付ける)」のサンプルコードです。  
+Morikatron Engineer Blog の記事 「[Python のプログラムを並列処理で高速化する](https://tech.morikatron.ai/entry/2020/03/13/100000)」のサンプルコードです。  
 詳しくはブログ記事を参照ください。
 
 # ファイルリスト

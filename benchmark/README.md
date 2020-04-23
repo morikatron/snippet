@@ -1,4 +1,4 @@
-Morikatron Engineer Blog の記事 「[Windows と Linux での Python 実行速度比較](公開されたURLを貼り付ける)」のサンプルコードです。  
+Morikatron Engineer Blog の記事 「[Windows と Linux での Python 実行速度比較](https://tech.morikatron.ai/entry/2020/03/20/100000)」のサンプルコードです。  
 詳しくはブログ記事を参照ください。
 
 # ファイルリスト
