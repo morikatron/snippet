@@ -1,8 +1,7 @@
-
 import pathlib
 
 class EnglishToKana:
-
+    
     def __init__(self,log=False):
 
         self.vowels = {
@@ -106,6 +105,8 @@ class EnglishToKana:
                         elif s=='NG' and s_next in {'K','G'}:
                             #'NG'の次が 'G' or 'K' の場合2文字目を削る　例）ング→ン
                             yomi += self.kana_dic[s][''][0]
+                        elif s_prev in {'EH','EY','IH','IY'} and s=='R':
+                            yomi += 'アー'
                         else:
                             yomi += self.kana_dic[s]['']
                     elif s in self.vowels:
@@ -181,4 +182,3 @@ class EnglishToKana:
             return self.eng_kana_dic[english]
         else:
             return 'ERROR 辞書にありません'
-
