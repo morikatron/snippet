@@ -1,4 +1,4 @@
-Morikatron Engineer Blog の記事 「[英語をカタカナ表記に変換してみる](https://tech.morikatron.ai/entry/2020/05/20/100000)」のサンプルコードです。  
+Morikatron Engineer Blog の記事 「[英語をカタカナ表記に変換してみる](https://tech.morikatron.ai/entry/2020/05/25/100000)」のサンプルコードです。  
 詳しくはブログ記事を参照ください。  
   
 プログラムの実行にあたっては  
