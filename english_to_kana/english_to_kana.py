@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Morikatron Engineer Blog の記事 「英語をカタカナ表記に変換してみる」のサンプルコードです。詳しくは下記URLのブログ記事をご参照ください。
-https://tech.morikatron.ai/entry/2020/05/20/100000
+https://tech.morikatron.ai/entry/2020/05/25/100000
 
 プログラムの実行にあたっては
 http://svn.code.sf.net/p/cmusphinx/code/trunk/cmudict/cmudict-0.7b
