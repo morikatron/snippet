@@ -20,6 +20,7 @@ def train():
     model = deepq.learn(
         env,
         "mlp",
+        seed=0,
         lr=2.5e-4,
         total_timesteps=400000,
         buffer_size=50000,
