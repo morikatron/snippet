@@ -1,4 +1,4 @@
-Morikatron Engineer Blog の記事 「[記事名]()」のサンプルコードです。
+Morikatron Engineer Blog の記事 「[Unity ML-Agents(Release 2)+baselinesを使って学習してみる(URL発行待ち)]()」のサンプルコードです。
 詳しくはブログ記事を参照ください。
 
 # ファイルリスト
