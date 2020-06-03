@@ -30,4 +30,4 @@ def play():
         obs = np.expand_dims(np.array(obs), axis=0)
 
 if __name__ == '__main__':
-    train()
+    play()
