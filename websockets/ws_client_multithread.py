@@ -3,8 +3,8 @@ import websockets
 import json
 import threading
 
-def thread_func(num):
 
+def thread_func(num):
     # イベントループを各スレッドごとに用意する必要があります。
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
@@ -12,7 +12,7 @@ def thread_func(num):
     # 接続
     uri = "ws://localhost:8001" + "/client{}".format(num)
     websocket = loop.run_until_complete(websockets.connect(uri))
-    print("Connect Success.")
+    print("thread {} connected.".format(num))
 
     # 受信
     dictionary = {'message': 'Message from Client', 'number': num, 'bool': True}
@@ -26,7 +26,7 @@ def thread_func(num):
 
     loop.run_until_complete(websocket.close())
     loop.close()
-    print("Finish")
+    print("thread {} finish.".format(num))
 
 
 # threading で同時に
