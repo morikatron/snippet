@@ -1,4 +1,4 @@
-Morikatron Engineer Blog の記事 「[WebSocket を TCP の代わりに使ってみる]()」のサンプルコードです。  
+Morikatron Engineer Blog の記事 「[WebSocket を TCP の代わりに使ってみる](https://tech.morikatron.ai/entry/2020/07/20/100000)」のサンプルコードです。  
 詳しくはブログ記事を参照ください。
 
 # ファイルリスト

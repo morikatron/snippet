@@ -21,4 +21,4 @@ print(dictionary)
 # 終了
 loop.run_until_complete(websocket.close())
 loop.close()
-print("Finish")
+print("Finish.")
