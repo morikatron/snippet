@@ -18,7 +18,7 @@ while True:
     # 受信
     received_packet = client.recv(receive_buffer_size)
     if len(received_packet) == 0:
-        #クライアントが切断した場合 recv() は 0Byte のByte列を返す
+        # クライアントが切断した場合 recv() は 0Byte のByte列を返す
         print("connection Lost.")
         break
     dictionary = json.loads(received_packet.decode())
