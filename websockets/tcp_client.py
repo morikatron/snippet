@@ -8,7 +8,7 @@ receive_buffer_size = 4096
 # 接続
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client.connect((host, port))
-print("Connect Success.")
+print("Successfully connected.")
 
 # 送信
 dictionary = {'message': 'Message from Client', 'number': 256, 'bool': True}
