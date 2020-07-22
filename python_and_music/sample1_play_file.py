@@ -24,7 +24,7 @@ wavfile.write("do.wav", SAMPLE_RATE,
 # wavファイルをロードして再生
 mixer.init()  # mixerを初期化
 mixer.music.load("do.wav")  # wavをロード
-mixer.music.play(1)  # wavを1秒再生
+mixer.music.play(1)  # wavを1回再生
 
 # 1秒（音がおわるまで）待つ
 time.sleep(1)

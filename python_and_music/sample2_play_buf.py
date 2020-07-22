@@ -23,7 +23,7 @@ def play(s: pyaudio.Stream, freq: float, duration: float):
     s.write(samples.astype(np.float32).tostring())
 
 
-# pyaudio開始
+# PyAudio開始
 p = pyaudio.PyAudio()
 
 # ストリームを開く
@@ -42,5 +42,5 @@ play(stream, 523.251, 0.6)  # note#72 C5 ド
 # ストリームを閉じる
 stream.close()
 
-# pyaudio終了
+# PyAudio終了
 p.terminate()
