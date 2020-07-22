@@ -5,7 +5,7 @@ sample3_play_all.py
 written by matsubara@morikatron.co.jp
 
 numpyでメモリ上に一気に作ったサイン波のデータ（トラック）を、
-pyaudioのstreamで一気に再生するサンプルコード。
+PyAudioのstreamで一気に再生するサンプルコード。
 """
 import numpy as np  # install : conda install numpy
 import pyaudio      # install : conda install pyaudio
@@ -22,7 +22,7 @@ def notenumber2wave(notenumber: int, duration: float) -> np.array:
     return np.sin(np.arange(int(duration * SAMPLE_RATE)) * freq * np.pi * 2 / SAMPLE_RATE)
 
 
-# pyaudio開始
+# PyAudio開始
 p = pyaudio.PyAudio()
 
 # ストリームを開く
@@ -45,5 +45,5 @@ stream.write(song.astype(np.float32).tostring())
 # ストリームを閉じる
 stream.close()
 
-# pyaudio終了
+# PyAudio終了
 p.terminate()

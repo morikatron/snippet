@@ -5,7 +5,7 @@ sample2_play_buf.py
 written by matsubara@morikatron.co.jp
 
 numpyでメモリ上に作ったサイン波を、
-pyaudioのstreamで順次再生するサンプルコード。
+PyAudioのstreamで順次再生するサンプルコード。
 これでドミソドーっと鳴ります。
 """
 import numpy as np  # install : conda install numpy
