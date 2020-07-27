@@ -72,7 +72,7 @@ def padding_and_stack(inputs: list) -> np.array:
     return np.vstack(inputs)
 
 
-# pyaudio開始
+# PyAudio開始
 p = pyaudio.PyAudio()
 
 # ストリームを開く
@@ -99,5 +99,5 @@ stream.write(song.astype(np.float32).tostring())
 # ストリームを閉じる
 stream.close()
 
-# pyaudio終了
+# PyAudio終了
 p.terminate()
