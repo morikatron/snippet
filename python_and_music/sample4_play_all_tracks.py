@@ -4,7 +4,7 @@ sample4_play_all_tracks.py
 © Morikatron Inc. 2019
 written by matsubara@morikatron.co.jp
 
-numpyでメモリ上に作った３つのトラックを合成して再生するサンプルコード。
+３つのトラックをミックスして再生するサンプルコード
 """
 import numpy as np  # install : conda install numpy
 import pyaudio      # install : conda install pyaudio
@@ -18,7 +18,14 @@ def notenumber2wave(notenumber: int, duration: float) -> np.array:
     # MIDIのノート番号を周波数に変換
     freq = 440.0 * 2 ** ((notenumber - 69) / 12)
     # 指定周波数のサイン波を指定秒数分生成
-    return np.sin(np.arange(int(duration * SAMPLE_RATE)) * freq * np.pi * 2 / SAMPLE_RATE)
+    samples = np.sin(np.arange(int(duration * SAMPLE_RATE)) * freq * np.pi * 2 / SAMPLE_RATE)
+    # 波形の頭とお尻を最大100サンプル(約0.002秒)をフェード処理する（つなぎ目のプチノイズ軽減のため）
+    fade_len = min(100, samples.size)  # フェード処理するサンプル数
+    slope = (np.arange(fade_len) - 1) / fade_len  # フェードインのスロープ計算
+    samples[:fade_len] = samples[:fade_len] * slope  # サンプル先頭とスロープを掛けてフェードイン
+    slope = ((fade_len - 1) - np.arange(fade_len)) / fade_len  # フェードアウトのスロープ計算
+    samples[-fade_len:] = samples[-fade_len:] * slope  # サンプル末尾とスロープを掛けてフェードアウト
+    return samples
 
 
 # 音名（C5とかC#5とか）のサイン波を、指定秒数生成してnumpy配列で返す関数
@@ -43,8 +50,8 @@ def name2wave(name: str, duration: float) -> np.array:
     return notenumber2wave(notenumber, duration)
 
 
-# 曲＝[(音名,長さ)の配列]をwaveに変換してnumpy配列で返す関数
-def notes2wave(notes: list) -> np.array:
+# トラック＝[(音名,長さ)の配列]をwaveに変換してnumpy配列で返す関数
+def notes2track(notes: list) -> np.array:
     arr = np.array([])
     for note in notes:
         arr = np.append(arr, name2wave(note[0], note[1]))
@@ -83,18 +90,18 @@ stream = p.open(format=pyaudio.paFloat32,
                 output=True)
 
 # トラックみっつ（ドレミファソー　+　ミファソラシー　+　ソラシドレー）の波形を作成
-song1 = notes2wave([("C4", 0.3), ("D4", 0.3), ("E4", 0.3), ("F4", 0.3), ("G4", 0.6)])
-song2 = notes2wave([("E4", 0.3), ("F4", 0.3), ("G4", 0.3), ("A4", 0.3), ("B4", 0.6)])
-song3 = notes2wave([("G4", 0.3), ("A4", 0.3), ("B4", 0.3), ("C5", 0.3), ("D5", 0.6)])
+track1 = notes2track([("C4", 0.3), ("D4", 0.3), ("E4", 0.3), ("F4", 0.3), ("G4", 0.6)])
+track2 = notes2track([("E4", 0.3), ("F4", 0.3), ("G4", 0.3), ("A4", 0.3), ("B4", 0.6)])
+track3 = notes2track([("G4", 0.3), ("A4", 0.3), ("B4", 0.3), ("C5", 0.3), ("D5", 0.6)])
 
-# 3つの波形の長さを揃えて縦に積む
-song = padding_and_stack([song1, song2, song3])
+# 3つのトラックの長さを揃えて縦に積む
+tracks = padding_and_stack([track1, track2, track3])
 
-# 1つの波形に合成（個々のサンプルの平均を取る）
-song = song.mean(axis=0)
+# 1つの波形に合成（個々のサンプルの平均を取る）＝ボリューム1:1:1のミキシング
+mixed = tracks.mean(axis=0)
 
 # 再生
-stream.write(song.astype(np.float32).tostring())
+stream.write(mixed.astype(np.float32).tostring())
 
 # ストリームを閉じる
 stream.close()
