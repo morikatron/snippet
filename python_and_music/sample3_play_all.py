@@ -1,7 +1,7 @@
 """
 sample3_play_all.py
 
-© Morikatron Inc. 2019
+© Morikatron Inc. 2020
 written by matsubara@morikatron.co.jp
 
 numpyでメモリ上に一気に作ったサイン波のデータ（トラック）を、

@@ -1,7 +1,7 @@
 """
 sample2_play_buf.py
 
-© Morikatron Inc. 2019
+© Morikatron Inc. 2020
 written by matsubara@morikatron.co.jp
 
 numpyでメモリ上に作ったサイン波を、

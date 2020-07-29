@@ -1,7 +1,7 @@
 """
 sample4_play_all_tracks.py
 
-© Morikatron Inc. 2019
+© Morikatron Inc. 2020
 written by matsubara@morikatron.co.jp
 
 ３つのトラックをミックスして再生するサンプルコード

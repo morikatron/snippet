@@ -1,7 +1,7 @@
 """
 sample1_play_file.py
 
-© Morikatron Inc. 2019
+© Morikatron Inc. 2020
 written by matsubara@morikatron.co.jp
 
 numpyでサイン波を作って
