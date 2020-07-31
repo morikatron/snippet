@@ -167,8 +167,8 @@ def play_midi(file_path: str) -> None:
 
 if __name__ == '__main__':
     argv = sys.argv
-    argc = len(argv)
-    if (argc == 2):  # １個目のパラメータはMIDIファイルのパスとする
+    argc: int = len(argv)
+    if argc == 2:  # １個目のパラメータはMIDIファイルのパスとする
         play_midi(argv[1])
     else:
         # 引数がないときは本プログラムの使い方を示す
