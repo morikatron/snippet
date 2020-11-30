@@ -4,7 +4,8 @@ Morikatron Engineer Blog の記事 「自動微分+XLA付き機械学習フレ�
 # 必要なライブラリのインストール
 ※Windowsには対応していません。
 ```bash
-pip install jax, jaxlib
+pip install jax
+pip install jaxlib
 pip install scikit-learn
 pip install tqdm
 pip install tensorflow  # tf_sample.pyを動かす場合のみ
