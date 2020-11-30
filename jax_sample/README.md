@@ -1,8 +1,8 @@
-Morikatron Engineer Blog の記事 「自動微分+XLA付き機械学習フレームワークJAXを使用してMNISTを学習させてみる」のサンプルコードです。
+Morikatron Engineer Blog の記事 「[自動微分+XLA付き機械学習フレームワークJAXを使用してMNISTを学習させてみる](https://tech.morikatron.ai/entry/2020/12/07/100000)」のサンプルコードです。
 詳しくはブログ記事を参照ください。
 
 # 必要なライブラリのインストール手順
-※Windowsには対応していません。
+※Windowsには対応していません。Python 3.6以降。
 ```bash
 pip install jax
 pip install jaxlib

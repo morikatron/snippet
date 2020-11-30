@@ -72,7 +72,7 @@ def train_one_epoch(model, X_train, y_train):
 
 
 def main():
-    print("fetching mnisit datasets…")
+    print("fetching mnist datasets...")
     X, y = datasets.fetch_openml('mnist_784', version=1, return_X_y=True)
     X /= 255.0
     one_hot_encoder = OneHotEncoder()
