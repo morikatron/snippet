@@ -5,7 +5,7 @@ Morikatron Engineer Blogのサンプルコードです。
 *　[Pythonと音楽と...（１）音を出す](https://tech.morikatron.ai/entry/2020/07/28/100000)  
 *　[Pythonと音楽と...（２）トラックとミックス](https://tech.morikatron.ai/entry/2020/08/10/100000)  
 *　[Pythonと音楽と...（３）MIDIファイルの再生](https://tech.morikatron.ai/entry/2020/08/17/100000)  
-*　[Pythonと音楽と...（４）MIDIファイルをtoioで再生](https://tech.morikatron.ai/entry/2020/12/28/100000)  
+*　[Pythonと音楽と...（４）MDIをtoioで演奏する](https://tech.morikatron.ai/entry/2021/2/1/100000)  
 
 ## ファイルリスト
 * [sample1_play_file.py](sample1_play_file.py)
