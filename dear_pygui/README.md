@@ -1,4 +1,4 @@
-Morikatron Engineer Blog の記事 「[hoge](fuga)」のサンプルコードです。  
+Morikatron Engineer Blog の記事 「[PythonのGUIフレームワーク「Dear PyGui」の紹介](https://tech.morikatron.ai/entry/2021/05/10/100000)」のサンプルコードです。  
 詳しくはブログ記事を参照ください。
 
 # ファイルリスト
