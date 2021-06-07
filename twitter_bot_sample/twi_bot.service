@@ -1,0 +1,13 @@
+[Unit]
+Description = GeneralTalker Twitter Bot Sample
+After = network-online.target
+ConditionPathExists = /mnt/hd1/yamada/gpt-2_talker/src/api_tests/twitter_bot_sample/
+
+[Service]
+WorkingDirectory = /mnt/hd1/yamada/gpt-2_talker/src/api_tests/twitter_bot_sample/
+ExecStart = /home/morikatron/anaconda3/envs/c/bin/python twi_bot.py
+Restart = always
+Type = simple
+
+[Install]
+WantedBy = multi-user.target
