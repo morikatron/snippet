@@ -5,7 +5,7 @@ Morikatron Engineer Blog の記事 「」のサンプルコードです。
 以下のプログラムを実行するには[Dear PyGui](https://github.com/hoffstadt/DearPyGui)が必要です。
 
 ## Example
-画像をクリックすると Github のサンプルプログラムが表示されます。
+画像の下のリンクをクリックする該当するサンプルプログラムを開きます。  
 サンプルプログラムは出来るだけ簡素に、コメントも省略してあるのでどれも短いコードになっています。
 
 ### Window
