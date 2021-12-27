@@ -55,5 +55,6 @@ Morikatron Engineer Blog の記事 「」のサンプルコードです。
 ## Widget
 
 ![image](gif/widget_example.gif)
+![image](gif/widget_example2.gif)
 
 [code](widget_example.py)
