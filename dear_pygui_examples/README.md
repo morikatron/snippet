@@ -1,4 +1,4 @@
-Morikatron Engineer Blog の記事 「[Dear PyGui チートシート(Ver.1.1.3 対応版)](URL)」のサンプルコードです。  
+Morikatron Engineer Blog の記事 「[Dear PyGui チートシート(Ver.1.1.3 対応版)](https://tech.morikatron.ai/entry/2021/12/28/100000)」のサンプルコードです。  
 詳しくはブログ記事を参照ください。
 
 # Example
