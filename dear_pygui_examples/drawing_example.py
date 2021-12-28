@@ -12,7 +12,7 @@ def update_drawing(sender, app_data, user_data):
 
 dpg.create_context()
 
-width, height, channels, data = dpg.load_image("sample_image.jpg")
+width, height, channels, data = dpg.load_image("resources/sample_image.jpg")
 
 with dpg.texture_registry():
     dpg.add_static_texture(width, height, data, tag="texture_tag")

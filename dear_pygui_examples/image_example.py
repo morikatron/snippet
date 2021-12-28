@@ -9,10 +9,10 @@ def open_window(sender, app_data, user_data):
 dpg.create_context()
 
 with dpg.texture_registry():
-    width, height, channels, data = dpg.load_image("image_button.png")
+    width, height, channels, data = dpg.load_image("resources/image_button.png")
     dpg.add_static_texture(width, height, data, tag="image_button")
 
-    width, height, channels, data = dpg.load_image("sample_image.jpg")
+    width, height, channels, data = dpg.load_image("resources/sample_image.jpg")
     dpg.add_static_texture(width, height, data, tag="texture_tag")
 
 with dpg.window(label="Using add_image()", tag="Using add_image()", show=False):

@@ -52,9 +52,20 @@ Morikatron Engineer Blog の記事 「」のサンプルコードです。
 
 [code](file_example2.py)
 
+## Font
+
+![image](gif/font_example.gif)
+
+[code](font_example.py)
+
 ## Widget
 
 ![image](gif/widget_example.gif)
 ![image](gif/widget_example2.gif)
 
 [code](widget_example.py)
+
+## License
+### Noto Sans JP
+https://fonts.google.com/noto/specimen/Noto+Sans+JP  
+Licensed under SIL Open Font License 1.1 (http://scripts.sil.org/OFL)
