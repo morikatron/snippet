@@ -14,7 +14,7 @@ $ pip install -r requiremens.txt
 
 ## 実行方法
 1. `slack_bot.py`中にあるSLACK_SIGNING_SECRET, SLACK_BOT_TOKEN, SLACK_CHANNEL, OPENAI_API_KEYを設定してください。  
-（GitHubの該当部分のリンクを掲載）  
+https://github.com/morikatron/snippet/blob/d7725dbfc21a203f0241feb0907d97c3808844c9/arxiv_summary/slack_bot.py#L34-L40  
 2. 以下を実行してください。
 
 ```
