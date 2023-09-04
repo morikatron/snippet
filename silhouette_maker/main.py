@@ -14,7 +14,7 @@ NEGATIVE_PROMPT = """(worst quality:2) (low quality:2) (normal quality:2) """\
     """illust,character,ukiyo-e,painting,digital painting,doll,nsfw,text"""
 
 # ControlNetに入力する画像
-MEDIA_PIPE_FACE_IMAGE = "./img/bace_face.png"
+MEDIA_PIPE_FACE_IMAGE = "./img/base_face.png"
 
 # 生成画像時の設定
 IMAGE_WIDTH = 568
