@@ -1,0 +1,8 @@
+ Count  License                                           
+ 2      Apache Software License                           
+ 1      Apache Software License; MIT License              
+ 4      BSD License                                       
+ 5      MIT License                                       
+ 1      MIT License; Mozilla Public License 2.0 (MPL 2.0) 
+ 1      Mozilla Public License 2.0 (MPL 2.0)              
+ 1      Python Software Foundation License                
