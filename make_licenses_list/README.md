@@ -12,7 +12,7 @@ pip-licenses を利用しています。
 ```bash
 conda create -n make_licenses_list_env python=3.11
 conda activate make_licenses_list_env
-pip install pip-licenses
+pip install pip-licenses==5.0.0
 ```
 
 ## リポジトリインストール
