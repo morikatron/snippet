@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>π</title>
+<meta name="description" content="円周率100万桁を「足して10」で消していくゲーム。2006年の試作の自動テストをブラウザで再現">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23e04a33'/%3E%3Ctext x='32' y='46' font-size='40' text-anchor='middle' fill='%23f6efdd' font-family='Georgia,serif'%3Eπ%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&text=%CF%80&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- APP-BODY-START -->
+<main class="wrap">
+
+  <button id="btn-theme" class="theme-btn" aria-label="ライトモードとダークモードを切り替える" title="ライト／ダーク切り替え">日</button>
+
+  <header class="hero">
+    <h1>π</h1>
+    <p class="tagline">円周率100万桁を「足して10」で消していく</p>
+  </header>
+
+  <section class="machine" aria-label="ゲーム画面">
+    <div class="screen">
+      <div class="statusline" id="statusline">読み込み中…</div>
+      <div class="board-area">
+        <div class="board" id="board" aria-label="数字の窓"></div>
+        <div class="sumbadge" id="sumbadge" hidden></div>
+      </div>
+      <div class="progress" aria-hidden="true"><div class="progress-fill" id="progressfill"></div></div>
+      <div class="progress-caption" id="progresscaption"></div>
+    </div>
+
+    <div class="controls">
+      <div class="ctl-row">
+        <button id="btn-auto" class="btn btn-primary" disabled>自動テスト</button>
+        <button id="btn-stop" class="btn" disabled>停止</button>
+        <button id="btn-undo" class="btn" disabled>一手戻す</button>
+        <button id="btn-reset" class="btn" disabled>リセット</button>
+      </div>
+      <div class="ctl-row speed-row">
+        <label for="speed">速さ</label>
+        <input type="range" id="speed" min="0" max="6" value="2">
+        <span id="speedlabel" class="speedlabel"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="story">
+    <details open>
+      <summary>遊びかた</summary>
+      <div class="details-body">
+        <p>
+          窓には、円周率の数字が先頭（3.1415926535…の「3」）から10桁ずつ見えています。
+          <strong>連続した並びで、合計が10の倍数になるところ</strong>をなぞって離すと消えます
+          （141 は 1+4+1=6 でダメ、415 は 4+1+5=10 で消える。1592653 は 1+5+9+2+6+5+3=31 で…ダメ）。
+          消えたぶんは後ろから詰まってきます。
+          これを繰り返して、円周率を全部消したら上がりです。全部で999,998桁あります。
+        </p>
+        <p class="fineprint">
+          細かいルール: 合計0（「0」1文字だけ）も10の倍数として消せます。当時の試作の実装と同じです。
+        </p>
+      </div>
+    </details>
+    <details>
+      <summary>「自動テスト」とは</summary>
+      <div class="details-body">
+        <p>
+          このゲームの元になった2006年のMac用試作には、「本当に最後まで消せるのか」を機械に
+          確かめさせる自動テストが組み込まれていました。やることは単純で、
+          <strong>窓の中の解を左から順に試し、行き止まりになったら一手戻して次の解を試す</strong>、
+          という深さ優先の総当たりです。このページの「自動テスト」ボタンはそれの再実装で、
+          解の選び方も同じ（開始位置の昇順→終わり位置の昇順、いつも0番から）なので、
+          動きは完全に再現になっています。速さを上げると、100万桁ぶんの探索が目の前で終わります。
+        </p>
+      </div>
+    </details>
+    <details>
+      <summary>これは何の再現？</summary>
+      <div class="details-body">
+        <p>
+          2007年発売のニンテンドーDS用ソフト『タシテン ＋たして10にする物語＋』（モリカトロン社長・
+          森川幸人と松原が作ったゲーム）のルールの原型は、2006年3月に作られた
+          「円周率100万桁から、足して10になる並びを消していく」というMac用の試作でした。
+          このページはその試作のルールと自動テストを、当時の資料にもとづいてブラウザ用に
+          作り直したものです。円周率のデータも作り直してあります（詳しくは
+          <a href="https://github.com/morikatron/snippet/tree/master/pi_game" target="_blank" rel="noopener">公開リポジトリ</a>のREADMEへ）。
+        </p>
+      </div>
+    </details>
+  </section>
+
+  <footer class="foot">
+    <p>コードとデータ: <a href="https://github.com/morikatron/snippet/tree/master/pi_game" target="_blank" rel="noopener">morikatron/snippet</a></p>
+  </footer>
+</main>
+
+<div class="overlay" id="overlay" hidden>
+  <div class="overlay-card" id="overlaycard"></div>
+</div>
+<!-- APP-BODY-END -->
+<script src="app.js"></script>
+</body>
+</html>

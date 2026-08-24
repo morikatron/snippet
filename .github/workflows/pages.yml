@@ -1,0 +1,58 @@
+# GitHub Pages へのデプロイ。
+# トップ階層のディレクトリのうち index.html を持つものだけをサイトとして公開する。
+# （＝ブラウザで動く形にしてあるものだけが公開対象。README とコードだけのディレクトリは公開されない）
+# 新しく公開したいものができたら、index.html 入りのディレクトリを push するだけでよい。
+name: pages
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Collect site (top-level dirs containing index.html)
+        run: |
+          mkdir _site
+          {
+            echo '<!doctype html><html lang="ja"><head><meta charset="utf-8">'
+            echo '<meta name="viewport" content="width=device-width, initial-scale=1">'
+            echo '<title>morikatron/snippet</title>'
+            echo '<style>body{font-family:-apple-system,"Hiragino Kaku Gothic ProN",sans-serif;background:#1b1926;color:#f6efdd;min-height:100vh;margin:0;display:grid;place-content:center;gap:8px;text-align:center}a{color:#f3c1b7;font-size:1.5rem;text-decoration:none}a:hover{text-decoration:underline}p{color:#a49dbb;margin:0 0 12px}</style>'
+            echo '</head><body>'
+            echo '<h1>morikatron/snippet</h1>'
+            echo '<p>ブラウザで動くもの</p>'
+            for d in */ ; do
+              d="${d%/}"
+              [ "$d" = "_site" ] && continue
+              if [ -f "$d/index.html" ]; then
+                cp -r "$d" "_site/$d"
+                echo "<a href=\"./$d/\">$d</a>"
+              fi
+            done
+            echo '</body></html>'
+          } > _site/index.html
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

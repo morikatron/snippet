@@ -1,0 +1,410 @@
+/* π — 夜のすみれ紺 × クリームの画面 × 朱赤。
+   ゲーム機（暗い筐体とクリームの画面）は両モード共通。
+   ページの地・本文・カードだけを data-mode で切り替える。
+   ホスト側のテーマに依存しないよう、背景と文字色はすべて明示する */
+
+:root {
+  /* モードで変わるもの（既定はダーク） */
+  --bg: #232032;
+  --dim: #a49dbb;
+  --title: #f6efdd;
+  --title-shadow: #1b1926;
+  --card: #1b1926;
+  --card-border: transparent;
+  --card-title: #f6efdd;
+  --strong: #f6efdd;
+  --link: #f3c1b7;
+  /* 両モード共通（ゲーム機まわり） */
+  --machine: #1b1926;
+  --machine-dim: #a49dbb;
+  --screen: #f6efdd;
+  --screen-edge: #d9cfb4;
+  --ink: #2b2733;
+  --ink-soft: #6b6377;
+  --paper-line: #e5dcc4;
+  --accent: #e04a33;
+  --accent-soft: #f3c1b7;
+  --ok: #2a9d8f;
+  --tile: #fffdf6;
+  --tile-shadow: rgba(43, 39, 51, 0.25);
+  --font-pixel: "DotGothic16", "Hiragino Kaku Gothic ProN", "Yu Gothic", monospace;
+  --font-body: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+}
+
+:root[data-mode="light"] {
+  --bg: #f2ecdf;
+  --dim: #5c5470;
+  --title: #2b2733;
+  --title-shadow: rgba(43, 39, 51, 0.18);
+  --card: #faf6ec;
+  --card-border: rgba(43, 39, 51, 0.14);
+  --card-title: #2b2733;
+  --strong: #2b2733;
+  --link: #c73a25;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--dim);
+  font-family: var(--font-body);
+  line-height: 1.9;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 16px 64px;
+}
+
+.theme-btn {
+  position: absolute;
+  top: 20px;
+  right: 16px;
+  width: 44px;
+  height: 44px;
+  font-family: var(--font-pixel);
+  font-size: 1.15rem;
+  line-height: 1;
+  color: var(--dim);
+  background: transparent;
+  border: 2px solid var(--dim);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.theme-btn:hover { color: var(--title); border-color: var(--title); }
+
+.theme-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ---- hero ---- */
+
+.hero { text-align: center; margin-bottom: 24px; }
+
+.hero h1 {
+  font-family: var(--font-pixel);
+  font-weight: 400;
+  font-size: clamp(2.2rem, 8vw, 3.4rem);
+  letter-spacing: 0.12em;
+  color: var(--title);
+  margin: 0 0 4px;
+  text-shadow: 0 4px 0 var(--title-shadow);
+}
+
+.hero .tagline {
+  font-family: var(--font-pixel);
+  color: var(--dim);
+  font-size: 0.95rem;
+  margin: 0;
+  letter-spacing: 0.08em;
+}
+
+/* ---- machine ---- */
+
+.machine {
+  background: var(--machine);
+  border-radius: 20px;
+  padding: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.screen {
+  background: var(--screen);
+  border: 3px solid var(--screen-edge);
+  border-radius: 12px;
+  padding: 14px 12px 12px;
+  color: var(--ink);
+}
+
+.statusline {
+  font-family: var(--font-pixel);
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  text-align: center;
+  border-bottom: 2px dotted var(--paper-line);
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+  min-height: 1.6em;
+  font-variant-numeric: tabular-nums;
+}
+
+.board-area { position: relative; }
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 4px;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.slot { text-align: center; }
+
+.tile {
+  font-family: var(--font-pixel);
+  font-size: clamp(1.2rem, 4.6vw, 2rem);
+  line-height: 1;
+  color: var(--ink);
+  background: var(--tile);
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  box-shadow: 0 3px 0 var(--tile-shadow);
+  padding: clamp(8px, 2.2vw, 14px) 0 clamp(6px, 2vw, 12px);
+  cursor: pointer;
+  transition: transform 0.15s, opacity 0.15s, background 0.1s, border-color 0.1s;
+}
+
+.slot.empty .tile {
+  visibility: hidden;
+}
+
+.slot.sel .tile {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  box-shadow: 0 3px 0 var(--accent);
+  transform: translateY(-2px);
+}
+
+.slot.flash-undo .tile {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.slot .pos {
+  font-family: var(--font-pixel);
+  font-size: 0.55rem;
+  color: var(--ink-soft);
+  margin-top: 4px;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.slot.erasing .tile {
+  transform: scale(0);
+  opacity: 0;
+}
+
+.slot.enter .tile {
+  transform: translateX(24px);
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile { transition: none; }
+}
+
+.sumbadge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-pixel);
+  font-size: 0.85rem;
+  background: var(--ink);
+  color: var(--screen);
+  border-radius: 999px;
+  padding: 2px 14px;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.sumbadge.ok { background: var(--ok); }
+
+.progress {
+  height: 10px;
+  background: var(--paper-line);
+  border-radius: 999px;
+  margin-top: 14px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+  border-radius: 999px;
+  transition: width 0.2s;
+}
+
+.progress-caption {
+  font-family: var(--font-pixel);
+  font-size: 0.7rem;
+  color: var(--ink-soft);
+  text-align: right;
+  margin-top: 4px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- controls ---- */
+
+.controls { padding: 12px 4px 2px; }
+
+.ctl-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.btn {
+  font-family: var(--font-pixel);
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  color: var(--screen);
+  background: transparent;
+  border: 2px solid var(--machine-dim);
+  border-radius: 10px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.btn:hover:not(:disabled) { border-color: var(--screen); }
+
+.btn:focus-visible,
+input:focus-visible,
+summary:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.btn:disabled { opacity: 0.35; cursor: default; }
+
+.btn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.btn-primary:hover:not(:disabled) { border-color: var(--accent-soft); }
+
+.speed-row label {
+  font-family: var(--font-pixel);
+  font-size: 0.85rem;
+  color: var(--machine-dim);
+}
+
+.speed-row input[type="range"] {
+  width: 180px;
+  accent-color: var(--accent);
+}
+
+.speedlabel {
+  font-family: var(--font-pixel);
+  font-size: 0.8rem;
+  color: var(--screen);
+  min-width: 7em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- story ---- */
+
+.story { margin-top: 32px; }
+
+.story details {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.story summary {
+  font-family: var(--font-pixel);
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  color: var(--card-title);
+  padding: 12px 18px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.story summary::before {
+  content: "▸ ";
+  color: var(--accent);
+}
+
+.story details[open] summary::before { content: "▾ "; }
+
+.details-body {
+  padding: 0 20px 16px;
+  font-size: 0.92rem;
+  color: var(--dim);
+}
+
+.details-body p { margin: 0 0 10px; }
+.details-body strong { color: var(--strong); font-weight: 700; }
+.details-body a { color: var(--link); }
+.fineprint { font-size: 0.8rem; opacity: 0.8; }
+
+/* ---- footer ---- */
+
+.foot {
+  margin-top: 28px;
+  text-align: center;
+  font-family: var(--font-pixel);
+  font-size: 0.8rem;
+}
+
+.foot a { color: var(--dim); }
+
+/* ---- overlay ---- */
+
+.overlay[hidden] { display: none; }
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(27, 25, 38, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 10;
+}
+
+.overlay-card {
+  background: var(--screen);
+  color: var(--ink);
+  border-radius: 16px;
+  padding: 26px 30px;
+  max-width: 420px;
+  text-align: center;
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.5);
+}
+
+.overlay-card h2 {
+  font-family: var(--font-pixel);
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: var(--accent);
+  margin: 0 0 10px;
+}
+
+.overlay-card p { margin: 0 0 14px; font-variant-numeric: tabular-nums; }
+
+.overlay-card .ovl-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.overlay-card .btn {
+  color: var(--ink);
+  border-color: var(--ink-soft);
+}
+
+.overlay-card .btn-primary { color: #fff; border-color: var(--accent); }
