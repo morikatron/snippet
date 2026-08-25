@@ -11,16 +11,27 @@
 <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=DotGothic16&text=%CF%80&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<!-- PWA: ホーム画面に追加してアプリとして起動できるようにする -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#232032">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="π">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 </head>
 <body>
 <!-- APP-BODY-START -->
 <main class="wrap">
 
-  <button id="btn-theme" class="theme-btn" aria-label="ライトモードとダークモードを切り替える" title="ライト／ダーク切り替え">日</button>
-
-  <header class="hero">
+  <header class="topbar">
     <h1>π</h1>
-    <p class="tagline">円周率100万桁を「足して10」で消していく</p>
+    <p class="tagline">円周率100万桁を「足して10」で消す</p>
+    <button id="btn-theme" class="theme-switch" type="button" role="switch" aria-checked="false"
+            aria-label="画面の明暗を切り替える" title="明るい画面／暗い画面">
+      <span class="theme-switch-opt" data-opt="light">明</span>
+      <span class="theme-switch-opt" data-opt="dark">暗</span>
+    </button>
   </header>
 
   <section class="machine" aria-label="ゲーム画面">
