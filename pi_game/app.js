@@ -516,8 +516,26 @@ function showClearOverlay(how) {
 
 function applyThemeMode(mode) {
 	document.documentElement.dataset.mode = mode;
-	// ボタンには「押した先」のモードを出す（ダーク中は日、ライト中は月）
-	elBtnTheme.textContent = mode === "dark" ? "日" : "月";
+	// 明暗スイッチ（role="switch"）: 暗い画面のとき on
+	elBtnTheme.setAttribute("aria-checked", mode === "dark" ? "true" : "false");
+	// PWA として起動したときのステータスバー色を、style.css の --bg に合わせる
+	const meta = document.querySelector('meta[name="theme-color"]');
+	if (meta) {
+		const bg = getComputedStyle(document.documentElement)
+			.getPropertyValue("--bg")
+			.trim();
+		if (bg) meta.setAttribute("content", bg);
+	}
+}
+
+function registerServiceWorker() {
+	// オフライン起動用。file:// や非対応ブラウザでは何もしない
+	if (!("serviceWorker" in navigator)) return;
+	if (location.protocol !== "https:" && location.hostname !== "localhost")
+		return;
+	navigator.serviceWorker.register("./sw.js").catch(() => {
+		/* 登録できなくてもゲームは動く */
+	});
 }
 
 function initTheme() {
@@ -621,6 +639,7 @@ function bindEvents() {
 
 async function init() {
 	initTheme();
+	registerServiceWorker();
 	elSpeedLabel.textContent = SPEED_LABELS[Number(elSpeed.value)];
 	bindEvents();
 	try {

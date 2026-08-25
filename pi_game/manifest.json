@@ -1,0 +1,17 @@
+{
+  "name": "π — 円周率100万桁を「足して10」で消す",
+  "short_name": "π",
+  "description": "円周率100万桁を「足して10」で消していくゲーム",
+  "lang": "ja",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#232032",
+  "theme_color": "#232032",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
